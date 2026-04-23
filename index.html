@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Calculadora Fortcell Feed Aves - Bialtec Nutrition</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f7f9ff",
+                        "on-primary-fixed-variant": "#19409a",
+                        "secondary": "#376b00",
+                        "primary": "#00205f",
+                        "surface": "#f7f9ff",
+                        "surface-dim": "#d7dae0",
+                        "surface-container-low": "#f1f4fa",
+                        "primary-container": "#00338d",
+                        "tertiary-fixed": "#e1e3e4",
+                        "on-primary-container": "#81a1ff",
+                        "on-background": "#181c21",
+                        "secondary-fixed-dim": "#7adf00",
+                        "on-primary-fixed": "#00174b",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-surface-variant": "#444652",
+                        "surface-container": "#ebeef4",
+                        "on-secondary-fixed-variant": "#285000",
+                        "tertiary-container": "#383b3c",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f7f9ff",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "on-secondary-fixed": "#0d2000",
+                        "outline": "#747683",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "tertiary": "#232526",
+                        "surface-container-highest": "#e0e2e9",
+                        "on-secondary-container": "#3a6f00",
+                        "on-tertiary-container": "#a3a5a6",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#3759b3",
+                        "on-tertiary-fixed": "#191c1d",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#94fc32",
+                        "surface-container-high": "#e5e8ef",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e2e9",
+                        "inverse-primary": "#b4c5ff",
+                        "inverse-on-surface": "#eef1f7",
+                        "secondary-container": "#92f92f",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dbe1ff",
+                        "outline-variant": "#c4c6d4",
+                        "on-surface": "#181c21",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2d3136"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "xs": "8px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "sm": "16px",
+                        "gutter": "24px",
+                        "container-max": "1200px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "data-mono": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "data-mono": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h3": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex bg-slate-50 dark:bg-slate-950 text-blue-900 dark:text-blue-400 font-manrope text-xs font-semibold h-screen w-64 border-r border-slate-200 dark:border-slate-800 transition-all duration-200 ease-in-out fixed left-0 top-0 flex-col pt-16 z-50">
+<div class="px-6 mb-8 flex flex-col items-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-high mb-4 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-4xl text-outline">person</span>
+</div>
+<h2 class="font-h3 text-h3 text-on-surface">Dr. Bialtec</h2>
+<p class="font-body-sm text-body-sm text-outline mt-1">Especialista Aves</p>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full bg-primary text-on-primary py-3 rounded-DEFAULT font-h3 text-h3 hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                Nuevo Cálculo
+            </button>
+</div>
+<ul class="flex-1 flex flex-col gap-2 px-2">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT bg-white dark:bg-slate-900 text-blue-900 dark:text-blue-400 border-l-4 border-blue-900 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">calculate</span>
+<span class="font-h3 text-h3">Calculadora</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-h3 text-h3">Historial</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">biotech</span>
+<span class="font-h3 text-h3">Parámetros</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-h3 text-h3">Reportes</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto px-2 pb-6 border-t border-slate-200 dark:border-slate-800 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-h3 text-h3">Soporte</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-white dark:bg-slate-900 font-manrope text-sm font-medium uppercase tracking-wider w-full top-0 border-b border-slate-200 dark:border-slate-800 transition-colors z-40 sticky">
+<div class="flex justify-between items-center w-full px-6 py-3 max-w-[1200px] mx-auto">
+<div class="text-xl font-bold text-blue-900 dark:text-blue-200 tracking-tight flex items-center gap-2">
+                    Bialtec Nutrition
+                </div>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-400 transition-colors opacity-80 hover:opacity-100 p-2 rounded-full hover:bg-slate-50 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-400 transition-colors opacity-80 hover:opacity-100 p-2 rounded-full hover:bg-slate-50 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 p-6 md:p-xl max-w-container-max mx-auto w-full">
+<div class="mb-lg">
+<h1 class="font-h1 text-h1 text-on-surface mb-2">Calculadora Fortcell Feed Aves</h1>
+<p class="font-body-md text-body-md text-outline">Proyección de rendimiento cárnico basado en adición de Fortcell.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Input Section -->
+<div class="lg:col-span-7 bg-surface-container-lowest border border-outline-variant p-lg flex flex-col gap-md">
+<h2 class="font-h2 text-h2 text-primary border-b border-outline-variant pb-xs mb-sm">Parámetros de Entrada</h2>
+<div class="flex flex-col gap-sm">
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-base uppercase tracking-widest" for="fortcell-amount">Gramos de Fortcell a adicionar</label>
+<div class="relative">
+<input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-3 px-4 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="fortcell-amount" placeholder="0.00" step="0.01" type="number"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 font-data-mono text-data-mono text-outline">g</span>
+</div>
+</div>
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-base uppercase tracking-widest" for="feed-energy">Energía del alimento</label>
+<div class="relative">
+<input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-3 px-4 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="feed-energy" placeholder="0" step="1" type="number"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 font-data-mono text-data-mono text-outline">kcal</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-md">
+<button id="calc-btn" class="w-full bg-primary text-on-primary font-h3 text-h3 py-4 rounded-DEFAULT hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calculate</span>
+                            Calcular Proyección
+                        </button>
+</div>
+</div>
+<!-- Results Section -->
+<div class="lg:col-span-5 bg-[#F7F8F9] border border-outline-variant p-lg flex flex-col">
+<h2 class="font-h2 text-h2 text-primary border-b border-outline-variant pb-xs mb-md">Resultados</h2>
+<div class="flex-1 flex flex-col justify-center items-center text-center p-md bg-white border-l-[2px] border-primary">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs uppercase tracking-widest">Gramos de carne adicionales proyectados</p>
+<div class="font-h1 text-h1 text-on-surface flex items-baseline gap-2">
+<span id="result-val" class="text-[48px] leading-[56px] font-bold text-secondary">--</span>
+<span class="font-data-mono text-data-mono text-outline">g</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-sm max-w-[250px]">Ingrese los parámetros para calcular la proyección estimada.</p>
+</div>
+<div class="mt-md bg-surface-container-low p-sm border border-outline-variant rounded-DEFAULT flex items-start gap-3">
+<span class="material-symbols-outlined text-outline mt-1">info</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Los resultados son estimaciones basadas en modelos biotecnológicos estandarizados. Los resultados reales pueden variar según las condiciones específicas de la granja.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<py-config>
+    [[fetch]]
+    files = ["./Calculadora.py"]
+</py-config>
+<script type="py">
+    from pyscript import document
+    from Calculadora import calcular_sintesis
+
+    def on_calc_click(event):
+        try:
+            dosis = float(document.querySelector("#fortcell-amount").value)
+        except:
+            dosis = 0.0
+            
+        try:
+            em = float(document.querySelector("#feed-energy").value)
+        except:
+            em = 0.0
+            
+        res = calcular_sintesis(dosis, em)
+        document.querySelector("#result-val").innerText = str(res)
+
+    document.querySelector("#calc-btn").addEventListener("click", on_calc_click)
+</script>
+</body></html>
