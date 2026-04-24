@@ -1,45 +1,48 @@
-import json
-
 def calcular_sintesis(dosis_ff_g_ton, em_kcal_kg):
-    # Tabla de referencia: Dosis FF (g/Ton) vs Sintesis de Carne (g/kg alimento)
-    datos_referencia = [
-        (0, 0.0),
-        (200, 17.1747236),
-        (300, 20.9109792),
-        (500, 23.8035642),
-        (600, 24.5869727),
-        (700, 25.0690702),
-        (800, 26.2009513),
-        (1000, 30.131094)
-    ]
+    """
+    Modelo mecanístico in silico de Bialtec
+    """
+    # Si el usuario no ingresa energía, usamos la base del modelo (2007.44 kcal/kg)
+    if em_kcal_kg <= 0:
+        em_kcal_kg = 2007.44
+        
+    # Tabla de referencia: Dosis FF vs Mejora relativa en degradabilidad (%)
+    dosis_list = [0, 200, 300, 500, 600, 700, 800, 1000]
+    delta_list = [0.00, 2.85, 3.47, 3.95, 4.08, 4.16, 4.23, 4.30]
     
-    # Interpolación lineal simple para la dosis
-    sintesis_base = 0.0
-    for i in range(len(datos_referencia) - 1):
-        x0, y0 = datos_referencia[i]
-        x1, y1 = datos_referencia[i+1]
+    # 1. Interpolación lineal para obtener el delta relativo (%)
+    delta_rel_pct = 0.0
+    for i in range(len(dosis_list) - 1):
+        x0, y0 = dosis_list[i], delta_list[i]
+        x1, y1 = dosis_list[i+1], delta_list[i+1]
         if x0 <= dosis_ff_g_ton <= x1:
-            sintesis_base = y0 + (y1 - y0) * ((dosis_ff_g_ton - x0) / (x1 - x0))
+            delta_rel_pct = y0 + (y1 - y0) * ((dosis_ff_g_ton - x0) / (x1 - x0))
             break
     else:
-        # Si es mayor al máximo o menor al mínimo
-        if dosis_ff_g_ton > datos_referencia[-1][0]:
-            # Extrapolación plana o lineal simple, usaremos el máximo para este ejemplo
-            # o una extrapolación lineal basada en el último segmento
-            x0, y0 = datos_referencia[-2]
-            x1, y1 = datos_referencia[-1]
-            sintesis_base = y0 + (y1 - y0) * ((dosis_ff_g_ton - x0) / (x1 - x0))
+        # Extrapolación si la dosis es mayor a 1000
+        if dosis_ff_g_ton > dosis_list[-1]:
+            x0, y0 = dosis_list[-2], delta_list[-2]
+            x1, y1 = dosis_list[-1], delta_list[-1]
+            delta_rel_pct = y0 + (y1 - y0) * ((dosis_ff_g_ton - x0) / (x1 - x0))
         elif dosis_ff_g_ton < 0:
-            sintesis_base = 0.0
-
-    # Ajuste por energía (se asume un alimento estándar de 3000 kcal/kg como base, si no se especifica)
-    # Este es un modelo sugerido, ajustando proporcionalmente la síntesis en función de la energía
-    energia_base = 3000.0
-    if em_kcal_kg > 0:
-        factor_energia = em_kcal_kg / energia_base
-    else:
-        factor_energia = 1.0
-
-    sintesis_final = sintesis_base * factor_energia
-
-    return round(sintesis_final, 2)
+            delta_rel_pct = 0.0
+            
+    delta_rel = delta_rel_pct / 100.0
+    
+    # 2. Energía Metabolizable (EM) liberada
+    # em_liberada = em_base * delta_relativa
+    em_liberada = em_kcal_kg * delta_rel
+    
+    # 3. Conversión a Energía Neta (EN) adicional
+    EN_EM_RATIO = 0.742980688
+    en_adicional = em_liberada * EN_EM_RATIO
+    
+    # 4. Síntesis de Proteína + Grasa
+    K_PG_CALIBRADO = 8.24999996  # kcal requeridas por gramo de P+G
+    sintesis_pg_g = en_adicional / K_PG_CALIBRADO
+    
+    # 5. Síntesis de Carne total
+    FRACCION_PG_EN_CARNE = 0.30  # La carne es ~30% proteína y grasa (el resto es agua/ceniza)
+    sintesis_carne = sintesis_pg_g / FRACCION_PG_EN_CARNE
+    
+    return round(sintesis_carne, 2)
