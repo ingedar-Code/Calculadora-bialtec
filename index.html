@@ -234,23 +234,24 @@
     files = ["./Calculadora.py"]
 </py-config>
 <script type="py">
-    from pyscript import document
+    from pyscript import document, when
     from Calculadora import calcular_sintesis
 
+    @when("click", "#calc-btn")
     def on_calc_click(event):
         try:
-            dosis = float(document.querySelector("#fortcell-amount").value)
+            val_dosis = document.querySelector("#fortcell-amount").value
+            dosis = float(val_dosis) if val_dosis else 0.0
         except:
             dosis = 0.0
             
         try:
-            em = float(document.querySelector("#feed-energy").value)
+            val_em = document.querySelector("#feed-energy").value
+            em = float(val_em) if val_em else 0.0
         except:
             em = 0.0
             
         res = calcular_sintesis(dosis, em)
         document.querySelector("#result-val").innerText = str(res)
-
-    document.querySelector("#calc-btn").addEventListener("click", on_calc_click)
 </script>
 </body></html>
