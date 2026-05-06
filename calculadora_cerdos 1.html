@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora Comercial Fortcell Feed - Cerdos Ceba</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --primary: #1f7a4d;
+      --primary-dark: #145c38;
+      --accent: #e8f5ee;
+      --border: #d9e2ec;
+      --warning: #fff7e6;
+      --warning-border: #f4c542;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    header {
+      background: linear-gradient(135deg, #145c38, #1f7a4d);
+      color: white;
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    header p {
+      margin: 0;
+      opacity: 0.92;
+      font-size: 15px;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 24px auto;
+      padding: 0 16px 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 8px 22px rgba(16, 24, 40, 0.06);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin: 0 0 12px;
+    }
+
+    .form-group {
+      margin-bottom: 13px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 11px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      background: white;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid rgba(31,122,77,.18);
+      border-color: var(--primary);
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .primary {
+      background: var(--primary);
+      color: white;
+      flex: 1;
+    }
+
+    .primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .secondary {
+      background: #eef2f6;
+      color: var(--text);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .summary {
+        grid-template-columns: repeat(2, minmax(150px, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .summary {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .metric {
+      background: var(--accent);
+      border: 1px solid #cce9d9;
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+    }
+
+    .metric .value {
+      font-size: 24px;
+      font-weight: 800;
+      margin-top: 6px;
+      color: var(--primary-dark);
+    }
+
+    .metric .small {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .warning {
+      background: var(--warning);
+      border: 1px solid var(--warning-border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    .charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .charts {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    canvas {
+      max-height: 330px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    th, td {
+      padding: 9px 8px;
+      border-bottom: 1px solid var(--border);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child, td:first-child {
+      text-align: left;
+    }
+
+    th {
+      background: #f0f4f8;
+      color: #344054;
+      font-size: 12px;
+    }
+
+    tr.highlight {
+      background: #e8f5ee;
+      font-weight: 700;
+    }
+
+    .section-title {
+      margin: 22px 0 10px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .model {
+      background: #f8fafc;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      color: #344054;
+      font-size: 13px;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 100px;
+      background: #e8f5ee;
+      color: #145c38;
+      font-weight: 700;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 16px;
+    }
+
+    .scenario {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .scenario {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .scenario-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 13px;
+      background: #fbfcfe;
+    }
+
+    .scenario-box h3 {
+      margin: 0 0 7px;
+      font-size: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Calculadora Comercial Fortcell Feed — Cerdos Levante/Ceba</h1>
+    <p>Modelo estimativo: dosis → degradabilidad → ED/EM/EN → ganancia adicional → ROI</p>
+  </header>
+
+  <main>
+    <div class="grid">
+      <aside class="card">
+        <h2>Parámetros de entrada</h2>
+
+        <div class="form-group">
+          <label for="dose">Dosis Fortcell Feed</label>
+          <input id="dose" type="number" value="500" min="0" step="10" />
+          <div class="hint">g por tonelada de alimento</div>
+        </div>
+
+        <div class="form-group">
+          <label for="grossEnergy">Energía bruta del alimento</label>
+          <input id="grossEnergy" type="number" value="3600" min="2500" step="10" />
+          <div class="hint">kcal EB/kg alimento</div>
+        </div>
+
+        <div class="form-group">
+          <label for="feedPrice">Precio alimento de ceba</label>
+          <input id="feedPrice" type="number" value="1812" min="0" step="10" />
+          <div class="hint">COP/kg alimento</div>
+        </div>
+
+        <div class="form-group">
+          <label for="fortcellPrice">Precio Fortcell Feed</label>
+          <input id="fortcellPrice" type="number" value="33" min="0" step="1" />
+          <div class="hint">COP/g producto</div>
+        </div>
+
+        <div class="form-group">
+          <label for="pigPrice">Precio cerdo en pie</label>
+          <input id="pigPrice" type="number" value="8300" min="0" step="100" />
+          <div class="hint">COP/kg peso vivo</div>
+        </div>
+
+        <div class="form-group">
+          <label for="baseFcr">Conversión alimenticia base</label>
+          <input id="baseFcr" type="number" value="2.19" min="1" step="0.01" />
+          <div class="hint">kg alimento/kg ganancia</div>
+        </div>
+
+        <div class="form-group">
+          <label for="cycleFeed">Consumo total por cerdo en ciclo</label>
+          <input id="cycleFeed" type="number" value="193" min="1" step="1" />
+          <div class="hint">kg alimento/cerdo desde precebo o levante hasta salida</div>
+        </div>
+
+        <div class="form-group">
+          <label for="targetGain">Ganancia objetivo del ciclo</label>
+          <input id="targetGain" type="number" value="88" min="1" step="1" />
+          <div class="hint">kg ganancia/cerdo</div>
+        </div>
+
+        <div class="form-group">
+          <label for="baseDays">Duración base del ciclo</label>
+          <input id="baseDays" type="number" value="91" min="1" step="1" />
+          <div class="hint">días</div>
+        </div>
+
+        <div class="section-title">Supuestos metabólicos</div>
+
+        <div class="form-group">
+          <label for="baseDeg">Degradabilidad base simulador GI</label>
+          <input id="baseDeg" type="number" value="46" min="1" max="100" step="0.1" />
+          <div class="hint">% de materia seca degradada en control</div>
+        </div>
+
+        <div class="form-group">
+          <label for="meDe">Relación EM/ED</label>
+          <input id="meDe" type="number" value="0.96" min="0" max="1" step="0.01" />
+        </div>
+
+        <div class="form-group">
+          <label for="neMe">Relación EN/EM</label>
+          <input id="neMe" type="number" value="0.74" min="0" max="1" step="0.01" />
+        </div>
+
+        <div class="form-group">
+          <label for="proteinPct">Proteína en tejido ganado</label>
+          <input id="proteinPct" type="number" value="18.5" min="1" max="40" step="0.1" />
+          <div class="hint">% del peso ganado</div>
+        </div>
+
+        <div class="form-group">
+          <label for="fatPct">Grasa en tejido ganado</label>
+          <input id="fatPct" type="number" value="5.5" min="0" max="40" step="0.1" />
+          <div class="hint">% del peso ganado</div>
+        </div>
+
+        <div class="button-row">
+          <button class="primary" onclick="calculate()">Calcular</button>
+          <button class="secondary" onclick="resetDefaults()">Reset</button>
+        </div>
+
+        <div class="footer-note">
+          La curva dosis-respuesta se interpola desde tus datos experimentales: 0, 200, 300, 500, 600, 700, 800 y 1000 g/t.
+        </div>
+      </aside>
+
+      <section>
+        <div class="warning">
+          <strong>Interpretación metabólica:</strong> el mismo beneficio energético puede verse de dos formas comerciales:
+          <strong>1)</strong> el cerdo come igual y gana más peso, o <strong>2)</strong> el cerdo alcanza el mismo peso consumiendo menos alimento.
+          Metabólicamente, el escenario más robusto suele ser <strong>mejor conversión alimenticia</strong>: misma ganancia con menos alimento o menos días, porque evita asumir que el animal siempre convertirá todo el excedente energético en mayor peso.
+        </div>
+
+        <div class="summary">
+          <div class="metric">
+            <div class="label">Ganancia adicional</div>
+            <div class="value" id="extraGainKgTon">—</div>
+            <div class="small">kg peso vivo/ton alimento</div>
+          </div>
+          <div class="metric">
+            <div class="label">Nuevo FCR</div>
+            <div class="value" id="newFcr">—</div>
+            <div class="small">kg alimento/kg ganancia</div>
+          </div>
+          <div class="metric">
+            <div class="label">Utilidad bruta</div>
+            <div class="value" id="grossProfitTon">—</div>
+            <div class="small">COP/ton alimento</div>
+          </div>
+          <div class="metric">
+            <div class="label">ROI</div>
+            <div class="value" id="roi">—</div>
+            <div class="small">veces inversión Fortcell</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Resultado para la dosis seleccionada <span class="pill" id="dosePill">—</span></h2>
+          <div class="scenario">
+            <div class="scenario-box">
+              <h3>Escenario A: mismo consumo, más peso</h3>
+              <p id="scenarioA">—</p>
+            </div>
+            <div class="scenario-box">
+              <h3>Escenario B: mismo peso, menos alimento / menos días</h3>
+              <p id="scenarioB">—</p>
+            </div>
+          </div>
+
+          <div class="section-title">Detalle energético</div>
+          <div class="model" id="energyDetail">—</div>
+        </div>
+
+        <div class="charts">
+          <div class="card">
+            <h2>Dosis vs utilidad bruta</h2>
+            <canvas id="profitChart"></canvas>
+          </div>
+          <div class="card">
+            <h2>Dosis vs conversión alimenticia</h2>
+            <canvas id="fcrChart"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Tabla comparativa por dosis</h2>
+          <div style="overflow-x:auto;">
+            <table id="resultTable">
+              <thead>
+                <tr>
+                  <th>Dosis g/t</th>
+                  <th>Δ degrad.</th>
+                  <th>ED</th>
+                  <th>EM</th>
+                  <th>EN</th>
+                  <th>ΔEN</th>
+                  <th>kg extra/ton</th>
+                  <th>FCR</th>
+                  <th>Costo/ton</th>
+                  <th>Ingreso/ton</th>
+                  <th>Utilidad/ton</th>
+                  <th>ROI</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+<script>
+  // Datos experimentales de dosis vs delta relativa de degradación.
+  // deltaRel se expresa como decimal: 2.85% = 0.0285.
+  const doseResponse = [
+    { dose: 0, deltaRel: 0.0000 },
+    { dose: 200, deltaRel: 0.0285 },
+    { dose: 300, deltaRel: 0.0347 },
+    { dose: 500, deltaRel: 0.0395 },
+    { dose: 600, deltaRel: 0.0408 },
+    { dose: 700, deltaRel: 0.0416 },
+    { dose: 800, deltaRel: 0.0423 },
+    { dose: 1000, deltaRel: 0.0430 }
+  ];
+
+  let profitChart;
+  let fcrChart;
+
+  function money(value) {
+    if (!isFinite(value)) return "—";
+    return value.toLocaleString("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0
+    });
+  }
+
+  function num(value, decimals = 1) {
+    if (!isFinite(value)) return "—";
+    return value.toLocaleString("es-CO", {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+  }
+
+  function getInput(id) {
+    const value = parseFloat(document.getElementById(id).value);
+    return isFinite(value) ? value : 0;
+  }
+
+  function interpolateDelta(dose) {
+    if (dose <= doseResponse[0].dose) return doseResponse[0].deltaRel;
+
+    const last = doseResponse[doseResponse.length - 1];
+    if (dose >= last.dose) return last.deltaRel;
+
+    for (let i = 0; i < doseResponse.length - 1; i++) {
+      const a = doseResponse[i];
+      const b = doseResponse[i + 1];
+
+      if (dose >= a.dose && dose <= b.dose) {
+        const t = (dose - a.dose) / (b.dose - a.dose);
+        return a.deltaRel + t * (b.deltaRel - a.deltaRel);
+      }
+    }
+
+    return 0;
+  }
+
+  function calcForDose(dose, params) {
+    const deltaRel = interpolateDelta(dose);
+    const degradationBase = params.baseDeg / 100;
+    const degradationTotal = degradationBase * (1 + deltaRel);
+
+    const ed = params.grossEnergy * degradationTotal;
+    const me = ed * params.meDe;
+    const ne = me * params.neMe;
+
+    const edBase = params.grossEnergy * degradationBase;
+    const meBase = edBase * params.meDe;
+    const neBase = meBase * params.neMe;
+
+    const deltaNe = Math.max(0, ne - neBase);
+
+    // Energía química aproximada retenida por gramo de tejido ganado.
+    // Proteína: 5.66 kcal/g. Grasa: 9.46 kcal/g.
+    const kcalPerGramTissue =
+      (params.proteinPct / 100) * 5.66 +
+      (params.fatPct / 100) * 9.46;
+
+    const extraGainGkgFeed = kcalPerGramTissue > 0 ? deltaNe / kcalPerGramTissue : 0;
+    const extraGainKgTon = extraGainGkgFeed; // g/kg equivale a kg/ton.
+
+    const baseGainKgPerKgFeed = 1 / params.baseFcr;
+    const newGainKgPerKgFeed = baseGainKgPerKgFeed + (extraGainGkgFeed / 1000);
+    const newFcr = newGainKgPerKgFeed > 0 ? 1 / newGainKgPerKgFeed : params.baseFcr;
+
+    const fortcellCostKgFeed = dose * params.fortcellPrice / 1000;
+    const fortcellCostTon = fortcellCostKgFeed * 1000;
+
+    const extraIncomeKgFeed = (extraGainGkgFeed / 1000) * params.pigPrice;
+    const extraIncomeTon = extraIncomeKgFeed * 1000;
+
+    const grossProfitKgFeed = extraIncomeKgFeed - fortcellCostKgFeed;
+    const grossProfitTon = grossProfitKgFeed * 1000;
+
+    const roi = fortcellCostTon > 0 ? grossProfitTon / fortcellCostTon : null;
+
+    // Escenario B: para lograr la misma ganancia objetivo, cuántos kg de alimento se ahorrarían.
+    const baseFeedForTargetGain = params.targetGain * params.baseFcr;
+    const newFeedForTargetGain = params.targetGain * newFcr;
+    const feedSavedPerPig = Math.max(0, baseFeedForTargetGain - newFeedForTargetGain);
+    const feedSavingValuePerPig = feedSavedPerPig * params.feedPrice;
+
+    // Si el consumo diario se mantiene, cuántos días podría acortar.
+    const dailyFeedIntake = params.cycleFeed / params.baseDays;
+    const daysSaved = dailyFeedIntake > 0 ? feedSavedPerPig / dailyFeedIntake : 0;
+
+    // Escenario A: mismo consumo total por cerdo.
+    const extraKgPerPigSameFeed = (extraGainGkgFeed / 1000) * params.cycleFeed;
+    const extraIncomePerPigSameFeed = extraKgPerPigSameFeed * params.pigPrice;
+    const fortcellCostPerPig = (dose / 1000) * params.cycleFeed * params.fortcellPrice;
+    const grossProfitPerPigSameFeed = extraIncomePerPigSameFeed - fortcellCostPerPig;
+
+    return {
+      dose,
+      deltaRel,
+      degradationTotal,
+      ed,
+      me,
+      ne,
+      deltaNe,
+      extraGainGkgFeed,
+      extraGainKgTon,
+      newFcr,
+      fortcellCostKgFeed,
+      fortcellCostTon,
+      extraIncomeTon,
+      grossProfitTon,
+      roi,
+      baseFeedForTargetGain,
+      newFeedForTargetGain,
+      feedSavedPerPig,
+      feedSavingValuePerPig,
+      daysSaved,
+      extraKgPerPigSameFeed,
+      extraIncomePerPigSameFeed,
+      fortcellCostPerPig,
+      grossProfitPerPigSameFeed,
+      kcalPerGramTissue
+    };
+  }
+
+  function getParams() {
+    return {
+      dose: getInput("dose"),
+      grossEnergy: getInput("grossEnergy"),
+      feedPrice: getInput("feedPrice"),
+      fortcellPrice: getInput("fortcellPrice"),
+      pigPrice: getInput("pigPrice"),
+      baseFcr: getInput("baseFcr"),
+      cycleFeed: getInput("cycleFeed"),
+      targetGain: getInput("targetGain"),
+      baseDays: getInput("baseDays"),
+      baseDeg: getInput("baseDeg"),
+      meDe: getInput("meDe"),
+      neMe: getInput("neMe"),
+      proteinPct: getInput("proteinPct"),
+      fatPct: getInput("fatPct")
+    };
+  }
+
+  function calculate() {
+    const params = getParams();
+    const selected = calcForDose(params.dose, params);
+
+    document.getElementById("dosePill").textContent = `${num(params.dose, 0)} g/t`;
+    document.getElementById("extraGainKgTon").textContent = num(selected.extraGainKgTon, 1);
+    document.getElementById("newFcr").textContent = num(selected.newFcr, 2);
+    document.getElementById("grossProfitTon").textContent = money(selected.grossProfitTon);
+    document.getElementById("roi").textContent = selected.roi === null ? "—" : `${num(selected.roi, 1)}x`;
+
+    document.getElementById("scenarioA").innerHTML =
+      `Con el mismo consumo de <strong>${num(params.cycleFeed, 1)} kg alimento/cerdo</strong>, ` +
+      `el modelo estima <strong>${num(selected.extraKgPerPigSameFeed, 2)} kg adicionales/cerdo</strong>. ` +
+      `Ingreso adicional: <strong>${money(selected.extraIncomePerPigSameFeed)}</strong>. ` +
+      `Costo Fortcell: <strong>${money(selected.fortcellCostPerPig)}</strong>. ` +
+      `Utilidad bruta: <strong>${money(selected.grossProfitPerPigSameFeed)}</strong>.`;
+
+    document.getElementById("scenarioB").innerHTML =
+      `Para lograr la misma ganancia de <strong>${num(params.targetGain, 1)} kg/cerdo</strong>, ` +
+      `el nuevo FCR permitiría usar <strong>${num(selected.feedSavedPerPig, 2)} kg menos alimento/cerdo</strong>. ` +
+      `Equivale a <strong>${money(selected.feedSavingValuePerPig)}</strong> en alimento evitado y aproximadamente ` +
+      `<strong>${num(selected.daysSaved, 1)} días menos</strong> si el consumo diario se mantiene.`;
+
+    document.getElementById("energyDetail").innerHTML =
+      `Degradabilidad total estimada: <strong>${num(selected.degradationTotal * 100, 2)}%</strong><br>` +
+      `ED: <strong>${num(selected.ed, 0)} kcal/kg</strong> | ` +
+      `EM: <strong>${num(selected.me, 0)} kcal/kg</strong> | ` +
+      `EN: <strong>${num(selected.ne, 0)} kcal/kg</strong> | ` +
+      `ΔEN vs control: <strong>${num(selected.deltaNe, 1)} kcal/kg</strong><br>` +
+      `Energía estimada por gramo de tejido ganado: <strong>${num(selected.kcalPerGramTissue, 2)} kcal/g</strong>. ` +
+      `Producción adicional estimada: <strong>${num(selected.extraGainGkgFeed, 1)} g/kg alimento</strong>.`;
+
+    const standardDoses = [0, 200, 300, 500, 600, 700, 800, 1000];
+    if (!standardDoses.includes(params.dose)) standardDoses.push(params.dose);
+    standardDoses.sort((a, b) => a - b);
+
+    const rows = standardDoses.map(d => calcForDose(d, params));
+    renderTable(rows, params.dose);
+    renderCharts(rows);
+  }
+
+  function renderTable(rows, selectedDose) {
+    const tbody = document.querySelector("#resultTable tbody");
+    tbody.innerHTML = "";
+
+    rows.forEach(r => {
+      const tr = document.createElement("tr");
+      if (Math.abs(r.dose - selectedDose) < 0.0001) {
+        tr.classList.add("highlight");
+      }
+
+      tr.innerHTML = `
+        <td>${num(r.dose, 0)}</td>
+        <td>${num(r.deltaRel * 100, 2)}%</td>
+        <td>${num(r.ed, 0)}</td>
+        <td>${num(r.me, 0)}</td>
+        <td>${num(r.ne, 0)}</td>
+        <td>${num(r.deltaNe, 1)}</td>
+        <td>${num(r.extraGainKgTon, 1)}</td>
+        <td>${num(r.newFcr, 2)}</td>
+        <td>${money(r.fortcellCostTon)}</td>
+        <td>${money(r.extraIncomeTon)}</td>
+        <td>${money(r.grossProfitTon)}</td>
+        <td>${r.roi === null ? "—" : num(r.roi, 1) + "x"}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderCharts(rows) {
+    const labels = rows.map(r => r.dose.toString());
+    const profits = rows.map(r => Math.round(r.grossProfitTon));
+    const fcrs = rows.map(r => Number(r.newFcr.toFixed(3)));
+
+    if (profitChart) profitChart.destroy();
+    if (fcrChart) fcrChart.destroy();
+
+    profitChart = new Chart(document.getElementById("profitChart"), {
+      type: "line",
+      data: {
+        labels,
+        datasets: [{
+          label: "Utilidad bruta COP/ton",
+          data: profits,
+          tension: 0.3,
+          pointRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: true },
+          tooltip: {
+            callbacks: {
+              label: context => money(context.raw)
+            }
+          }
+        },
+        scales: {
+          x: { title: { display: true, text: "Dosis Fortcell Feed, g/t" } },
+          y: { title: { display: true, text: "COP/ton alimento" } }
+        }
+      }
+    });
+
+    fcrChart = new Chart(document.getElementById("fcrChart"), {
+      type: "line",
+      data: {
+        labels,
+        datasets: [{
+          label: "FCR estimado",
+          data: fcrs,
+          tension: 0.3,
+          pointRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: true } },
+        scales: {
+          x: { title: { display: true, text: "Dosis Fortcell Feed, g/t" } },
+          y: { title: { display: true, text: "kg alimento/kg ganancia" } }
+        }
+      }
+    });
+  }
+
+  function resetDefaults() {
+    document.getElementById("dose").value = 500;
+    document.getElementById("grossEnergy").value = 3600;
+    document.getElementById("feedPrice").value = 1812;
+    document.getElementById("fortcellPrice").value = 33;
+    document.getElementById("pigPrice").value = 8300;
+    document.getElementById("baseFcr").value = 2.19;
+    document.getElementById("cycleFeed").value = 193;
+    document.getElementById("targetGain").value = 88;
+    document.getElementById("baseDays").value = 91;
+    document.getElementById("baseDeg").value = 46;
+    document.getElementById("meDe").value = 0.96;
+    document.getElementById("neMe").value = 0.74;
+    document.getElementById("proteinPct").value = 18.5;
+    document.getElementById("fatPct").value = 5.5;
+    calculate();
+  }
+
+  document.querySelectorAll("input").forEach(input => {
+    input.addEventListener("input", calculate);
+  });
+
+  calculate();
+</script>
+</body>
+</html>
