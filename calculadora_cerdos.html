@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Calculadora Fortcell Feed Aves - Bialtec Nutrition</title>
+    <title>Calculadora Fortcell Feed Cerdos - Bialtec Nutrition</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -107,8 +107,6 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        
-        /* Remove arrows from number inputs for a cleaner look */
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
             -webkit-appearance: none; 
@@ -119,7 +117,6 @@
             font-feature-settings: "tnum";
             font-variant-numeric: tabular-nums;
         }
-        
         table {
             border-collapse: collapse;
             width: 100%;
@@ -151,18 +148,18 @@
     </style>
 </head>
 <body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row">
-<!-- SideNavBar (Desktop Only) -->
+<!-- SideNavBar -->
 <nav id="sidebar" class="hidden md:flex bg-surface-container-lowest text-primary font-manrope text-xs font-semibold h-screen w-64 border-r border-surface-variant transition-transform duration-300 ease-in-out fixed left-0 top-0 flex-col pt-16 z-50">
     <div class="px-6 mb-8 flex flex-col items-center">
         <div class="w-16 h-16 rounded-full bg-surface-container-high mb-4 flex items-center justify-center overflow-hidden">
             <span class="material-symbols-outlined text-4xl text-outline">person</span>
         </div>
         <h2 class="font-h3 text-h3 text-on-surface">Dr. Bialtec</h2>
-        <p class="font-body-sm text-body-sm text-outline mt-1">Especialista Aves</p>
+        <p class="font-body-sm text-body-sm text-outline mt-1">Especialista Cerdos</p>
     </div>
     <ul class="flex-1 flex flex-col gap-2 px-2">
         <li>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT bg-surface-container-low text-primary border-l-4 border-primary transition-all duration-200" href="index.html">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 border-l-4 border-transparent" href="index.html">
                 <span class="material-symbols-outlined">flutter_dash</span>
                 <span class="font-h3 text-h3">Calc. Aves</span>
             </a>
@@ -174,18 +171,12 @@
             </a>
         </li>
         <li>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 border-l-4 border-transparent" href="calculadora_cerdos.html">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT bg-surface-container-low text-primary border-l-4 border-primary transition-all duration-200" href="calculadora_cerdos.html">
                 <span class="material-symbols-outlined">savings</span>
                 <span class="font-h3 text-h3">Calc. Cerdos</span>
             </a>
         </li>
     </ul>
-    <div class="mt-auto px-2 pb-6 border-t border-surface-variant pt-4">
-        <a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 border-l-4 border-transparent" href="#">
-            <span class="material-symbols-outlined">help</span>
-            <span class="font-h3 text-h3">Soporte</span>
-        </a>
-    </div>
 </nav>
 
 <!-- Main Content Area -->
@@ -213,50 +204,42 @@
     <!-- Canvas -->
     <div class="flex-1 p-6 md:p-lg max-w-container-max mx-auto w-full">
         <div class="mb-lg">
-            <h1 class="font-h1 text-h1 text-on-surface mb-2">Calculadora Comercial Fortcell Feed — Aves</h1>
-            <p class="font-body-md text-body-md text-outline">Modelo estimativo: dosis → degradabilidad → EM → EN → ganancia de carne → ROI</p>
+            <h1 class="font-h1 text-h1 text-on-surface mb-2">Calculadora Comercial Fortcell Feed — Cerdos Levante/Ceba</h1>
+            <p class="font-body-md text-body-md text-outline">Modelo estimativo: dosis → degradabilidad → ED/EM/EN → ganancia adicional → ROI</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
-            
             <!-- Inputs Section -->
             <div class="lg:col-span-4 flex flex-col gap-md">
                 
                 <div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg shadow-sm">
                     <h2 class="font-h2 text-h2 text-primary mb-sm border-b border-outline-variant pb-xs">Parámetros Comerciales</h2>
-                    
                     <div class="flex flex-col gap-sm">
                         <div class="flex flex-col">
                             <label class="font-label-caps text-label-caps text-on-surface-variant mb-base group relative cursor-help w-fit flex items-center gap-1" for="dose">
                                 DOSIS FORTCELL FEED
                                 <span class="material-symbols-outlined text-[14px]">info</span>
-                                <span class="absolute bottom-full left-0 mb-1 hidden w-48 bg-tertiary text-on-tertiary text-xs p-2 rounded shadow-lg group-hover:block z-50 normal-case tracking-normal font-normal">
-                                    Desliza para explorar escenarios dinámicamente.
-                                </span>
                             </label>
                             <div class="relative">
-                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="dose" value="500" type="number"/>
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="dose" value="500" step="10" type="number"/>
                                 <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">g/t</span>
                             </div>
-                            <input type="range" id="doseSlider" min="0" max="1000" step="50" value="500" class="w-full mt-3 h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary"/>
+                            <input type="range" id="doseSlider" min="0" max="1000" step="10" value="500" class="w-full mt-3 h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary"/>
                         </div>
-
                         <div class="flex flex-col">
-                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="emEnergy">ENERGÍA METABOLIZABLE (EM)</label>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="grossEnergy">ENERGÍA BRUTA DEL ALIMENTO</label>
                             <div class="relative">
-                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="emEnergy" value="3000" type="number"/>
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="grossEnergy" value="3600" type="number"/>
                                 <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">kcal/kg</span>
                             </div>
                         </div>
-
                         <div class="flex flex-col">
-                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="feedPrice">PRECIO ALIMENTO</label>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="feedPrice">PRECIO ALIMENTO DE CEBA</label>
                             <div class="relative">
-                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="feedPrice" value="1800" type="number"/>
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="feedPrice" value="1812" type="number"/>
                                 <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">COP/kg</span>
                             </div>
                         </div>
-
                         <div class="flex flex-col">
                             <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="fortcellPrice">PRECIO FORTCELL FEED</label>
                             <div class="relative">
@@ -264,11 +247,10 @@
                                 <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">COP/g</span>
                             </div>
                         </div>
-
                         <div class="flex flex-col">
-                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="birdPrice">PRECIO POLLO EN PIE</label>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="pigPrice">PRECIO CERDO EN PIE</label>
                             <div class="relative">
-                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="birdPrice" value="5000" type="number"/>
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="pigPrice" value="8300" type="number"/>
                                 <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">COP/kg</span>
                             </div>
                         </div>
@@ -277,39 +259,29 @@
 
                 <div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg shadow-sm">
                     <h2 class="font-h2 text-h2 text-primary mb-sm border-b border-outline-variant pb-xs">Productivos &amp; Ciclo</h2>
-                    
                     <div class="flex flex-col gap-sm">
                         <div class="flex flex-col">
-                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base group relative cursor-help w-fit flex items-center gap-1" for="baseFcr">
-                                CONVERSIÓN ALIMENTICIA (FCR)
-                                <span class="material-symbols-outlined text-[14px]">info</span>
-                                <span class="absolute bottom-full left-0 mb-1 hidden w-48 bg-tertiary text-on-tertiary text-xs p-2 rounded shadow-lg group-hover:block z-50 normal-case tracking-normal font-normal">
-                                    Kilos de alimento necesarios para producir 1 kilo de carne.
-                                </span>
-                            </label>
-                            <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="baseFcr" value="1.55" step="0.01" type="number"/>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="baseFcr">CONVERSIÓN ALIMENTICIA BASE</label>
+                            <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="baseFcr" value="2.19" step="0.01" type="number"/>
                         </div>
-
                         <div class="flex flex-col">
-                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="cycleFeed">CONSUMO POR AVE EN CICLO</label>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="cycleFeed">CONSUMO POR CERDO EN CICLO</label>
                             <div class="relative">
-                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="cycleFeed" value="4.5" step="0.1" type="number"/>
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="cycleFeed" value="193" type="number"/>
                                 <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">kg</span>
                             </div>
                         </div>
-
                         <div class="flex flex-col">
-                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="targetGain">GANANCIA OBJETIVO</label>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="targetGain">GANANCIA OBJETIVO DEL CICLO</label>
                             <div class="relative">
-                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="targetGain" value="2.9" step="0.1" type="number"/>
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="targetGain" value="88" type="number"/>
                                 <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">kg</span>
                             </div>
                         </div>
-
                         <div class="flex flex-col">
-                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="baseDays">DURACIÓN DEL CICLO</label>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="baseDays">DURACIÓN BASE DEL CICLO</label>
                             <div class="relative">
-                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="baseDays" value="42" type="number"/>
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="baseDays" value="91" type="number"/>
                                 <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">días</span>
                             </div>
                         </div>
@@ -317,45 +289,39 @@
                 </div>
 
                 <div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg shadow-sm">
-                    <h2 class="font-h2 text-h2 text-primary mb-sm border-b border-outline-variant pb-xs">Metabólicos (Aves)</h2>
-                    
+                    <h2 class="font-h2 text-h2 text-primary mb-sm border-b border-outline-variant pb-xs">Metabólicos</h2>
                     <div class="flex flex-col gap-sm">
                         <div class="flex flex-col">
-                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base group relative cursor-help w-fit flex items-center gap-1" for="neMe">
-                                RELACIÓN EN/EM
-                                <span class="material-symbols-outlined text-[14px]">info</span>
-                                <span class="absolute bottom-full left-0 mb-1 hidden w-48 bg-tertiary text-on-tertiary text-xs p-2 rounded shadow-lg group-hover:block z-50 normal-case tracking-normal font-normal">
-                                    Eficiencia con la que el ave convierte la EM en EN. Rango típico: 0.70 - 0.76.
-                                </span>
-                            </label>
-                            <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="neMe" value="0.74" step="0.01" type="number"/>
-                        </div>
-
-                        <div class="flex flex-col">
-                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base group relative cursor-help w-fit flex items-center gap-1" for="kPg">
-                                COSTO ENERGÉTICO SÍNTESIS P+G
-                                <span class="material-symbols-outlined text-[14px]">info</span>
-                                <span class="absolute bottom-full left-0 mb-1 hidden w-56 bg-tertiary text-on-tertiary text-xs p-2 rounded shadow-lg group-hover:block z-50 normal-case tracking-normal font-normal">
-                                    Kcal necesarias para sintetizar un gramo de proteína/grasa combinada.
-                                </span>
-                            </label>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="baseDeg">DEGRADABILIDAD BASE GI</label>
                             <div class="relative">
-                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="kPg" value="8.25" step="0.01" type="number"/>
-                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">kcal/g</span>
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="baseDeg" value="46" step="0.1" type="number"/>
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">%</span>
                             </div>
                         </div>
-
-                        <div class="flex flex-col">
-                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base group relative cursor-help w-fit flex items-center gap-1" for="fraccionPg">
-                                FRACCIÓN P+G EN CARNE
-                                <span class="material-symbols-outlined text-[14px]">info</span>
-                                <span class="absolute bottom-full left-0 mb-1 hidden w-56 bg-tertiary text-on-tertiary text-xs p-2 rounded shadow-lg group-hover:block z-50 normal-case tracking-normal font-normal">
-                                    Porcentaje de la ganancia que es pura proteína/grasa (el resto es agua/ceniza).
-                                </span>
-                            </label>
-                            <div class="relative">
-                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="fraccionPg" value="30" step="1" type="number"/>
-                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">%</span>
+                        <div class="grid grid-cols-2 gap-sm">
+                            <div class="flex flex-col">
+                                <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="meDe">RELACIÓN EM/ED</label>
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="meDe" value="0.96" step="0.01" type="number"/>
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="neMe">RELACIÓN EN/EM</label>
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="neMe" value="0.74" step="0.01" type="number"/>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-sm">
+                            <div class="flex flex-col">
+                                <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="proteinPct">PROTEÍNA TEJIDO</label>
+                                <div class="relative">
+                                    <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="proteinPct" value="18.5" step="0.1" type="number"/>
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">%</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="fatPct">GRASA TEJIDO</label>
+                                <div class="relative">
+                                    <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="fatPct" value="5.5" step="0.1" type="number"/>
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -376,7 +342,9 @@
                     <div class="flex items-start gap-3">
                         <span class="material-symbols-outlined text-secondary mt-1">info</span>
                         <p class="font-body-sm text-body-sm">
-                            <strong>Interpretación metabólica:</strong> El beneficio energético se puede aprovechar para <strong>1)</strong> que el ave alcance mayor peso con el mismo consumo, o <strong>2)</strong> que alcance el mismo peso en menos días o consumiendo menos alimento. Se recomienda evaluar en campo la mejora en conversión alimenticia (FCR).
+                            <strong>Interpretación metabólica:</strong> El mismo beneficio energético puede verse de dos formas:
+                            <strong>1)</strong> el cerdo come igual y gana más peso, o <strong>2)</strong> el cerdo alcanza el mismo peso consumiendo menos alimento.
+                            Metabólicamente, el escenario más robusto suele ser <strong>mejor conversión alimenticia</strong> (FCR).
                         </p>
                     </div>
                 </div>
@@ -386,10 +354,10 @@
                     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm shadow-sm border-l-2 border-l-primary">
                         <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">GANANCIA ADICIONAL</p>
                         <p class="font-h2 text-h2 text-primary" id="extraGainKgTon">—</p>
-                        <p class="font-body-sm text-xs text-outline">kg carne/ton alimento</p>
+                        <p class="font-body-sm text-xs text-outline">kg peso vivo/ton</p>
                     </div>
                     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm shadow-sm border-l-2 border-l-primary">
-                        <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">NUEVO FCR ESTIMADO</p>
+                        <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">NUEVO FCR</p>
                         <p class="font-h2 text-h2 text-primary" id="newFcr">—</p>
                         <p class="font-body-sm text-xs text-outline">kg alim / kg ganancia</p>
                     </div>
@@ -401,13 +369,13 @@
                     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm shadow-sm border-l-2 border-l-secondary">
                         <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">ROI</p>
                         <p class="font-h2 text-h2 text-secondary" id="roi">—</p>
-                        <p class="font-body-sm text-xs text-outline">veces inversión</p>
+                        <p class="font-body-sm text-xs text-outline">veces inversión FF</p>
                     </div>
                 </div>
 
                 <!-- Scenarios -->
                 <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm">
-                    <h2 class="font-h3 text-h3 text-primary mb-sm">Resultados para dosis <span id="dosePill" class="bg-primary-fixed text-on-primary-fixed px-2 py-1 rounded-full text-sm ml-2">—</span></h2>
+                    <h2 class="font-h3 text-h3 text-primary mb-sm">Resultado para la dosis seleccionada <span id="dosePill" class="bg-primary-fixed text-on-primary-fixed px-2 py-1 rounded-full text-sm ml-2">—</span></h2>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
                         <div class="bg-surface p-sm rounded-DEFAULT border border-surface-variant">
@@ -432,7 +400,7 @@
                         <canvas id="profitChart"></canvas>
                     </div>
                     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm">
-                        <h2 class="font-h3 text-sm text-primary mb-sm">Dosis vs FCR Estimado</h2>
+                        <h2 class="font-h3 text-sm text-primary mb-sm">Dosis vs Conversión Alimenticia</h2>
                         <canvas id="fcrChart"></canvas>
                     </div>
                 </div>
@@ -446,12 +414,16 @@
                         <table id="resultTable" class="w-full">
                             <thead>
                                 <tr>
-                                    <th>Dosis (g/t)</th>
-                                    <th>EM Adicional</th>
-                                    <th>EN Adicional</th>
+                                    <th>Dosis g/t</th>
+                                    <th>Δ degrad.</th>
+                                    <th>ED</th>
+                                    <th>EM</th>
+                                    <th>EN</th>
+                                    <th>ΔEN</th>
                                     <th>kg extra/ton</th>
                                     <th>FCR</th>
                                     <th>Costo/ton</th>
+                                    <th>Ingreso/ton</th>
                                     <th>Utilidad/ton</th>
                                     <th>ROI</th>
                                 </tr>
@@ -520,16 +492,22 @@
 
     function calcForDose(dose, params) {
         const deltaRel = interpolateDelta(dose);
-        
-        const emBase = params.emEnergy;
-        const emLiberada = emBase * deltaRel;
-        
-        const enAdicional = emLiberada * params.neMe;
-        
-        const sintesisPg = enAdicional / params.kPg;
-        const fraccionPgDec = params.fraccionPg / 100.0;
-        
-        const extraGainGkgFeed = fraccionPgDec > 0 ? sintesisPg / fraccionPgDec : 0;
+        const degradationBase = params.baseDeg / 100;
+        const degradationTotal = degradationBase * (1 + deltaRel);
+
+        const ed = params.grossEnergy * degradationTotal;
+        const me = ed * params.meDe;
+        const ne = me * params.neMe;
+
+        const edBase = params.grossEnergy * degradationBase;
+        const meBase = edBase * params.meDe;
+        const neBase = meBase * params.neMe;
+
+        const deltaNe = Math.max(0, ne - neBase);
+
+        const kcalPerGramTissue = (params.proteinPct / 100) * 5.66 + (params.fatPct / 100) * 9.46;
+
+        const extraGainGkgFeed = kcalPerGramTissue > 0 ? deltaNe / kcalPerGramTissue : 0;
         const extraGainKgTon = extraGainGkgFeed;
 
         const baseGainKgPerKgFeed = 1 / params.baseFcr;
@@ -539,7 +517,7 @@
         const fortcellCostKgFeed = dose * params.fortcellPrice / 1000;
         const fortcellCostTon = fortcellCostKgFeed * 1000;
 
-        const extraIncomeKgFeed = (extraGainGkgFeed / 1000) * params.birdPrice;
+        const extraIncomeKgFeed = (extraGainGkgFeed / 1000) * params.pigPrice;
         const extraIncomeTon = extraIncomeKgFeed * 1000;
 
         const grossProfitKgFeed = extraIncomeKgFeed - fortcellCostKgFeed;
@@ -549,40 +527,42 @@
 
         const baseFeedForTargetGain = params.targetGain * params.baseFcr;
         const newFeedForTargetGain = params.targetGain * newFcr;
-        const feedSavedPerBird = Math.max(0, baseFeedForTargetGain - newFeedForTargetGain);
-        const feedSavingValuePerBird = feedSavedPerBird * params.feedPrice;
+        const feedSavedPerPig = Math.max(0, baseFeedForTargetGain - newFeedForTargetGain);
+        const feedSavingValuePerPig = feedSavedPerPig * params.feedPrice;
 
         const dailyFeedIntake = params.cycleFeed / params.baseDays;
-        const daysSaved = dailyFeedIntake > 0 ? feedSavedPerBird / dailyFeedIntake : 0;
+        const daysSaved = dailyFeedIntake > 0 ? feedSavedPerPig / dailyFeedIntake : 0;
 
-        const extraKgPerBirdSameFeed = (extraGainGkgFeed / 1000) * params.cycleFeed;
-        const extraIncomePerBirdSameFeed = extraKgPerBirdSameFeed * params.birdPrice;
-        const fortcellCostPerBird = (dose / 1000) * params.cycleFeed * params.fortcellPrice;
-        const grossProfitPerBirdSameFeed = extraIncomePerBirdSameFeed - fortcellCostPerBird;
+        const extraKgPerPigSameFeed = (extraGainGkgFeed / 1000) * params.cycleFeed;
+        const extraIncomePerPigSameFeed = extraKgPerPigSameFeed * params.pigPrice;
+        const fortcellCostPerPig = (dose / 1000) * params.cycleFeed * params.fortcellPrice;
+        const grossProfitPerPigSameFeed = extraIncomePerPigSameFeed - fortcellCostPerPig;
 
         return {
-            dose, deltaRel, emBase, emLiberada, enAdicional,
-            extraGainGkgFeed, extraGainKgTon, newFcr,
+            dose, deltaRel, degradationTotal, ed, me, ne, deltaNe, extraGainGkgFeed, extraGainKgTon, newFcr,
             fortcellCostKgFeed, fortcellCostTon, extraIncomeTon, grossProfitTon, roi,
-            baseFeedForTargetGain, newFeedForTargetGain, feedSavedPerBird, feedSavingValuePerBird,
-            daysSaved, extraKgPerBirdSameFeed, extraIncomePerBirdSameFeed, fortcellCostPerBird, grossProfitPerBirdSameFeed
+            baseFeedForTargetGain, newFeedForTargetGain, feedSavedPerPig, feedSavingValuePerPig, daysSaved,
+            extraKgPerPigSameFeed, extraIncomePerPigSameFeed, fortcellCostPerPig, grossProfitPerPigSameFeed,
+            kcalPerGramTissue
         };
     }
 
     function getParams() {
         return {
             dose: getInput("dose"),
-            emEnergy: getInput("emEnergy"),
+            grossEnergy: getInput("grossEnergy"),
             feedPrice: getInput("feedPrice"),
             fortcellPrice: getInput("fortcellPrice"),
-            birdPrice: getInput("birdPrice"),
+            pigPrice: getInput("pigPrice"),
             baseFcr: getInput("baseFcr"),
             cycleFeed: getInput("cycleFeed"),
             targetGain: getInput("targetGain"),
             baseDays: getInput("baseDays"),
+            baseDeg: getInput("baseDeg"),
+            meDe: getInput("meDe"),
             neMe: getInput("neMe"),
-            kPg: getInput("kPg"),
-            fraccionPg: getInput("fraccionPg")
+            proteinPct: getInput("proteinPct"),
+            fatPct: getInput("fatPct")
         };
     }
 
@@ -592,26 +572,30 @@
 
         document.getElementById("dosePill").textContent = `${num(params.dose, 0)} g/t`;
         document.getElementById("extraGainKgTon").textContent = num(selected.extraGainKgTon, 1);
-        document.getElementById("newFcr").textContent = num(selected.newFcr, 3);
+        document.getElementById("newFcr").textContent = num(selected.newFcr, 2);
         document.getElementById("grossProfitTon").textContent = money(selected.grossProfitTon);
         document.getElementById("roi").textContent = selected.roi === null ? "—" : `${num(selected.roi, 1)}x`;
 
         document.getElementById("scenarioA").innerHTML =
-            `Con el mismo consumo de <strong>${num(params.cycleFeed, 2)} kg alimento/ave</strong>, ` +
-            `se estiman <strong>${num(selected.extraKgPerBirdSameFeed * 1000, 0)} g adicionales/ave</strong>. ` +
-            `Ingreso adicional: <strong>${money(selected.extraIncomePerBirdSameFeed)}</strong>. ` +
-            `Utilidad bruta: <strong>${money(selected.grossProfitPerBirdSameFeed)}</strong>.`;
+            `Con el mismo consumo de <strong>${num(params.cycleFeed, 1)} kg alimento/cerdo</strong>, ` +
+            `el modelo estima <strong>${num(selected.extraKgPerPigSameFeed, 2)} kg adicionales/cerdo</strong>. ` +
+            `Ingreso adicional: <strong>${money(selected.extraIncomePerPigSameFeed)}</strong>. ` +
+            `Utilidad bruta: <strong>${money(selected.grossProfitPerPigSameFeed)}</strong>.`;
 
         document.getElementById("scenarioB").innerHTML =
-            `Para lograr la ganancia de <strong>${num(params.targetGain, 2)} kg/ave</strong>, ` +
-            `se usarían <strong>${num(selected.feedSavedPerBird * 1000, 0)} g menos alimento/ave</strong>. ` +
-            `Ahorro en alimento: <strong>${money(selected.feedSavingValuePerBird)}</strong>. ` +
-            `Ahorro en tiempo: <strong>${num(selected.daysSaved, 1)} días menos</strong>.`;
+            `Para lograr la ganancia de <strong>${num(params.targetGain, 1)} kg/cerdo</strong>, ` +
+            `el nuevo FCR permite usar <strong>${num(selected.feedSavedPerPig, 2)} kg menos alimento/cerdo</strong>. ` +
+            `Equivale a <strong>${money(selected.feedSavingValuePerPig)}</strong> en alimento evitado, y ` +
+            `<strong>${num(selected.daysSaved, 1)} días menos</strong> si el consumo diario se mantiene.`;
 
         document.getElementById("energyDetail").innerHTML =
-            `Mejora en degradabilidad (estimada): <strong>${num(selected.deltaRel * 100, 2)}%</strong> &bull; ` +
-            `EM Liberada: <strong>${num(selected.emLiberada, 1)} kcal/kg</strong> &bull; ` +
-            `EN Adicional: <strong>${num(selected.enAdicional, 1)} kcal/kg</strong>`;
+            `Degradabilidad total estimada: <strong>${num(selected.degradationTotal * 100, 2)}%</strong><br>` +
+            `ED: <strong>${num(selected.ed, 0)} kcal/kg</strong> | ` +
+            `EM: <strong>${num(selected.me, 0)} kcal/kg</strong> | ` +
+            `EN: <strong>${num(selected.ne, 0)} kcal/kg</strong> | ` +
+            `ΔEN vs control: <strong>${num(selected.deltaNe, 1)} kcal/kg</strong><br>` +
+            `Energía estimada por gramo de tejido ganado: <strong>${num(selected.kcalPerGramTissue, 2)} kcal/g</strong>. ` +
+            `Producción adicional estimada: <strong>${num(selected.extraGainGkgFeed, 1)} g/kg alimento</strong>.`;
 
         const standardDoses = [0, 200, 300, 500, 600, 700, 800, 1000];
         if (!standardDoses.includes(params.dose)) standardDoses.push(params.dose);
@@ -628,16 +612,18 @@
 
         rows.forEach(r => {
             const tr = document.createElement("tr");
-            if (Math.abs(r.dose - selectedDose) < 0.0001) {
-                tr.classList.add("highlight");
-            }
+            if (Math.abs(r.dose - selectedDose) < 0.0001) tr.classList.add("highlight");
             tr.innerHTML = `
                 <td>${num(r.dose, 0)}</td>
-                <td>${num(r.emLiberada, 1)}</td>
-                <td>${num(r.enAdicional, 1)}</td>
-                <td>${num(r.extraGainKgTon, 2)}</td>
-                <td>${num(r.newFcr, 3)}</td>
+                <td>${num(r.deltaRel * 100, 2)}%</td>
+                <td>${num(r.ed, 0)}</td>
+                <td>${num(r.me, 0)}</td>
+                <td>${num(r.ne, 0)}</td>
+                <td>${num(r.deltaNe, 1)}</td>
+                <td>${num(r.extraGainKgTon, 1)}</td>
+                <td>${num(r.newFcr, 2)}</td>
                 <td>${money(r.fortcellCostTon)}</td>
+                <td>${money(r.extraIncomeTon)}</td>
                 <td>${money(r.grossProfitTon)}</td>
                 <td>${r.roi === null ? "—" : num(r.roi, 1) + "x"}</td>
             `;
@@ -704,38 +690,41 @@
     function resetDefaults() {
         document.getElementById("dose").value = 500;
         document.getElementById("doseSlider").value = 500;
-        document.getElementById("emEnergy").value = 3000;
-        document.getElementById("feedPrice").value = 1800;
+        document.getElementById("grossEnergy").value = 3600;
+        document.getElementById("feedPrice").value = 1812;
         document.getElementById("fortcellPrice").value = 33;
-        document.getElementById("birdPrice").value = 5000;
-        document.getElementById("baseFcr").value = 1.55;
-        document.getElementById("cycleFeed").value = 4.5;
-        document.getElementById("targetGain").value = 2.9;
-        document.getElementById("baseDays").value = 42;
+        document.getElementById("pigPrice").value = 8300;
+        document.getElementById("baseFcr").value = 2.19;
+        document.getElementById("cycleFeed").value = 193;
+        document.getElementById("targetGain").value = 88;
+        document.getElementById("baseDays").value = 91;
+        document.getElementById("baseDeg").value = 46;
+        document.getElementById("meDe").value = 0.96;
         document.getElementById("neMe").value = 0.74;
-        document.getElementById("kPg").value = 8.25;
-        document.getElementById("fraccionPg").value = 30;
+        document.getElementById("proteinPct").value = 18.5;
+        document.getElementById("fatPct").value = 5.5;
         calculate();
     }
 
-    // Add event listeners to all inputs to recalculate on change
     document.addEventListener("DOMContentLoaded", () => {
-        const inputs = document.querySelectorAll("input[type=number]");
+        const inputs = document.querySelectorAll("input, select");
         inputs.forEach(input => {
             input.addEventListener("input", calculate);
+            input.addEventListener("change", calculate);
         });
         
         const doseInput = document.getElementById('dose');
         const doseSlider = document.getElementById('doseSlider');
         
-        doseSlider.addEventListener('input', (e) => {
-            doseInput.value = e.target.value;
-            calculate();
-        });
-        
-        doseInput.addEventListener('input', (e) => {
-            doseSlider.value = e.target.value;
-        });
+        if(doseSlider && doseInput) {
+            doseSlider.addEventListener('input', (e) => {
+                doseInput.value = e.target.value;
+                calculate();
+            });
+            doseInput.addEventListener('input', (e) => {
+                doseSlider.value = e.target.value;
+            });
+        }
 
         calculate();
     });
@@ -743,11 +732,7 @@
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
         const mainContent = document.getElementById('main-content');
-        
-        // Toggle translation of sidebar to move it off-screen
         sidebar.classList.toggle('-translate-x-full');
-        
-        // Adjust main content margin to fill the gap smoothly
         if (sidebar.classList.contains('-translate-x-full')) {
             mainContent.classList.remove('md:ml-64');
             mainContent.classList.add('md:ml-0');

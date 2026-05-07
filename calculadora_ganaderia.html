@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Calculadora Fortcell Feed Ganadería - Bialtec Nutrition</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;900&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f7f9ff",
+                        "surface": "#f7f9ff",
+                        "surface-dim": "#d7dae0",
+                        "surface-bright": "#f7f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f1f4fa",
+                        "surface-container": "#ebeef4",
+                        "surface-container-high": "#e5e8ef",
+                        "surface-container-highest": "#e0e2e9",
+                        "on-surface": "#181c21",
+                        "on-surface-variant": "#444652",
+                        "inverse-surface": "#2d3136",
+                        "inverse-on-surface": "#eef1f7",
+                        "outline": "#747683",
+                        "outline-variant": "#c4c6d4",
+                        "surface-tint": "#3759b3",
+                        "primary": "#00205f",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#00338d",
+                        "on-primary-container": "#81a1ff",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary": "#376b00",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#92f92f",
+                        "on-secondary-container": "#3a6f00",
+                        "tertiary": "#232526",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#383b3c",
+                        "on-tertiary-container": "#a3a5a6",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dbe1ff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-fixed": "#00174b",
+                        "on-primary-fixed-variant": "#19409a",
+                        "secondary-fixed": "#94fc32",
+                        "secondary-fixed-dim": "#7adf00",
+                        "on-secondary-fixed": "#0d2000",
+                        "on-secondary-fixed-variant": "#285000",
+                        "tertiary-fixed": "#e1e3e4",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "on-tertiary-fixed": "#191c1d",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "on-background": "#181c21"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "sm": "0.125rem",
+                        "md": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xs": "8px",
+                        "sm": "16px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "xl": "64px",
+                        "gutter": "24px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Manrope", "sans-serif"],
+                        "h2": ["Manrope", "sans-serif"],
+                        "h3": ["Manrope", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "body-sm": ["Inter", "sans-serif"],
+                        "label-caps": ["Inter", "sans-serif"],
+                        "data-mono": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "h2": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "data-mono": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: right;
+            border-bottom: 1px solid #c4c6d4;
+            font-family: 'Inter', sans-serif;
+            font-feature-settings: "tnum";
+        }
+        th:first-child, td:first-child {
+            text-align: left;
+        }
+        th {
+            color: #00205f;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        td {
+            font-size: 14px;
+            color: #181c21;
+        }
+        tr.highlight {
+            background-color: #f1f4fa;
+            border-left: 2px solid #00205f;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar -->
+<nav id="sidebar" class="hidden md:flex bg-surface-container-lowest text-primary font-manrope text-xs font-semibold h-screen w-64 border-r border-surface-variant transition-transform duration-300 ease-in-out fixed left-0 top-0 flex-col pt-16 z-50">
+    <div class="px-6 mb-8 flex flex-col items-center">
+        <div class="w-16 h-16 rounded-full bg-surface-container-high mb-4 flex items-center justify-center overflow-hidden">
+            <span class="material-symbols-outlined text-4xl text-outline">person</span>
+        </div>
+        <h2 class="font-h3 text-h3 text-on-surface">Dr. Bialtec</h2>
+        <p class="font-body-sm text-body-sm text-outline mt-1">Especialista Ganadería</p>
+    </div>
+    <ul class="flex-1 flex flex-col gap-2 px-2">
+        <li>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 border-l-4 border-transparent" href="index.html">
+                <span class="material-symbols-outlined">flutter_dash</span>
+                <span class="font-h3 text-h3">Calc. Aves</span>
+            </a>
+        </li>
+        <li>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT bg-surface-container-low text-primary border-l-4 border-primary transition-all duration-200" href="calculadora_ganaderia.html">
+                <span class="material-symbols-outlined">agriculture</span>
+                <span class="font-h3 text-h3">Calc. Ganadería</span>
+            </a>
+        </li>
+        <li>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 border-l-4 border-transparent" href="calculadora_cerdos.html">
+                <span class="material-symbols-outlined">savings</span>
+                <span class="font-h3 text-h3">Calc. Cerdos</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Main Content Area -->
+<main id="main-content" class="flex-1 md:ml-64 flex flex-col min-h-screen transition-all duration-300 ease-in-out">
+    <!-- TopNavBar -->
+    <header class="bg-surface-container-lowest font-manrope text-sm font-medium uppercase tracking-wider w-full top-0 border-b border-surface-variant transition-colors z-40 sticky">
+        <div class="flex justify-between items-center w-full px-6 py-3 max-w-container-max mx-auto">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="text-outline hover:text-primary transition-colors p-2 -ml-2 rounded-full hover:bg-surface-container hidden md:block" aria-label="Toggle Sidebar">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <img src="img/Logo-color - copia.png" alt="Bialtec Nutrition Logo" class="h-8"/>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="text-outline hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container">
+                    <span class="material-symbols-outlined">settings</span>
+                </button>
+                <button class="text-outline hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Canvas -->
+    <div class="flex-1 p-6 md:p-lg max-w-container-max mx-auto w-full">
+        <div class="mb-lg">
+            <h1 class="font-h1 text-h1 text-on-surface mb-2">Calculadora Comercial Fortcell Feed — Ganadería</h1>
+            <p class="font-body-md text-body-md text-outline">Modelo estimativo: dosis → mejora de degradabilidad → ED/EM/EN → leche o ganancia de peso → ROI</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+            <!-- Inputs Section -->
+            <div class="lg:col-span-4 flex flex-col gap-md">
+                
+                <div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg shadow-sm">
+                    <h2 class="font-h2 text-h2 text-primary mb-sm border-b border-outline-variant pb-xs">Parámetros Comerciales</h2>
+                    <div class="flex flex-col gap-sm">
+                        <div class="flex flex-col">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="system">SISTEMA PRODUCTIVO</label>
+                            <select id="system" class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors">
+                                <option value="milk">Lechería especializada — Kikuyo + concentrado</option>
+                                <option value="beef">Carne / ceba — Braquiaria</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base group relative cursor-help w-fit flex items-center gap-1" for="dose">
+                                DOSIS FORTCELL FEED
+                                <span class="material-symbols-outlined text-[14px]">info</span>
+                            </label>
+                            <div class="relative">
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="dose" value="5" step="0.1" type="number"/>
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">g/día</span>
+                            </div>
+                            <input type="range" id="doseSlider" min="0" max="10" step="0.1" value="5" class="w-full mt-3 h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary"/>
+                        </div>
+                        <div class="flex flex-col" id="milkPriceContainer">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="milkPrice">PRECIO LECHE</label>
+                            <div class="relative">
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="milkPrice" value="2200" type="number"/>
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">COP/L</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col" id="meatPriceContainer" style="display: none;">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="meatPrice">PRECIO KG PESO VIVO</label>
+                            <div class="relative">
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="meatPrice" value="8500" type="number"/>
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">COP/kg</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-sm">
+                            <div class="flex flex-col">
+                                <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="fortcellPrice">PRECIO FF</label>
+                                <div class="relative">
+                                    <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="fortcellPrice" value="33" type="number"/>
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">/g</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="feedMsPrice">COSTO DIETA</label>
+                                <div class="relative">
+                                    <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="feedMsPrice" value="900" type="number"/>
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">/kg</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="animalDays">DÍAS EVALUACIÓN</label>
+                            <div class="relative">
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="animalDays" value="30" type="number"/>
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">días</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Productivos -->
+                <div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg shadow-sm">
+                    <h2 class="font-h2 text-h2 text-primary mb-sm border-b border-outline-variant pb-xs">Consumo y Dieta</h2>
+                    <div class="flex flex-col gap-sm">
+                        <div class="flex flex-col">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="dmi">CONSUMO MS TOTAL</label>
+                            <div class="relative">
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="dmi" value="18" step="0.1" type="number"/>
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">kg/día</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="foragePct">FORRAJE EN LA DIETA</label>
+                            <div class="relative">
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="foragePct" value="60" type="number"/>
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">% MS</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-sm">
+                            <div class="flex flex-col">
+                                <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="forageDeg">DEG. FORRAJE</label>
+                                <div class="relative">
+                                    <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="forageDeg" value="60" type="number"/>
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">%</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="concDeg">DEG. CONCEN.</label>
+                                <div class="relative">
+                                    <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="concDeg" value="62" type="number"/>
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-sm">
+                            <div class="flex flex-col">
+                                <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="forageEB">EB FORRAJE</label>
+                                <div class="relative">
+                                    <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="forageEB" value="4.4" step="0.1" type="number"/>
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">Mcal/kg</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="concEB">EB CONCEN.</label>
+                                <div class="relative">
+                                    <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="concEB" value="4.4" step="0.1" type="number"/>
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">Mcal/kg</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metabólicos -->
+                <div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg shadow-sm">
+                    <h2 class="font-h2 text-h2 text-primary mb-sm border-b border-outline-variant pb-xs">Conversión Energética</h2>
+                    <div class="flex flex-col gap-sm">
+                        <div class="grid grid-cols-2 gap-sm">
+                            <div class="flex flex-col">
+                                <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="meDe">EM / ED</label>
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="meDe" value="0.82" step="0.01" type="number"/>
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="neMe">EN / EM</label>
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="neMe" value="0.65" step="0.01" type="number"/>
+                            </div>
+                        </div>
+                        <div class="flex flex-col" id="milkMcalContainer">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="milkMcal">EN POR LITRO LECHE</label>
+                            <div class="relative">
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="milkMcal" value="0.74" step="0.01" type="number"/>
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">Mcal/L</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col" id="gainMcalContainer" style="display: none;">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="gainMcal">EN POR KG GANANCIA</label>
+                            <div class="relative">
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="gainMcal" value="5.5" step="0.1" type="number"/>
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">Mcal/kg</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="capture">FACTOR CAPTURA PRODUCTIVA</label>
+                            <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="capture" value="0.65" step="0.01" type="number"/>
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="responseMode">CURVA DOSIS-RESPUESTA</label>
+                            <select id="responseMode" class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors">
+                                <option value="provided">Tabla suministrada: 0 a 5.95 g</option>
+                                <option value="bios">Curva conservadora Bios: 200–500 g/t</option>
+                                <option value="manual">Manual (Puntos fijos)</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col" id="manualImprovementContainer" style="display: none;">
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-base" for="manualImprovement">MEJORA DMS MANUAL</label>
+                            <div class="relative">
+                                <input class="w-full bg-surface border border-outline-variant rounded-DEFAULT py-2 px-3 font-data-mono text-data-mono text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="manualImprovement" value="5" step="0.1" type="number"/>
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-data-mono text-xs text-outline">% abs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex mt-2">
+                    <button class="w-full bg-surface-container text-on-surface-variant py-3 px-4 rounded-DEFAULT font-h3 text-h3 hover:bg-surface-variant transition-colors flex items-center justify-center gap-2" onclick="applySystemDefaults()">
+                        <span class="material-symbols-outlined">restart_alt</span>
+                        Restablecer Valores
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="lg:col-span-8 flex flex-col gap-md">
+                
+                <div class="bg-secondary-container bg-opacity-20 border border-secondary-fixed-dim rounded-lg p-md text-on-secondary-container">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-secondary mt-1">info</span>
+                        <p class="font-body-sm text-body-sm">
+                            <strong>Base técnica:</strong> Esta calculadora permite usar una tabla de respuesta por dosis, o una curva apoyada en reportes de degradabilidad (DMS). Presenta resultados en litros de leche adicionales o como mayor ganancia de peso vivo según la EN aprovechable.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
+                    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm shadow-sm border-l-2 border-l-primary">
+                        <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">MEJORA DMS</p>
+                        <p class="font-h2 text-h2 text-primary" id="improvementOut">—</p>
+                        <p class="font-body-sm text-xs text-outline">puntos porcentuales</p>
+                    </div>
+                    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm shadow-sm border-l-2 border-l-primary">
+                        <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">ΔEN APROVECHABLE</p>
+                        <p class="font-h2 text-h2 text-primary" id="deltaNeOut">—</p>
+                        <p class="font-body-sm text-xs text-outline">Mcal/animal/día</p>
+                    </div>
+                    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm shadow-sm border-l-2 border-l-primary">
+                        <p class="font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase" id="mainProdLabel">PRODUCCIÓN ADIC.</p>
+                        <p class="font-h2 text-h2 text-primary" id="mainProdOut">—</p>
+                        <p class="font-body-sm text-xs text-outline" id="mainProdSmall">—</p>
+                    </div>
+                    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm shadow-sm border-l-2 border-l-secondary">
+                        <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">ROI</p>
+                        <p class="font-h2 text-h2 text-secondary" id="roiOut">—</p>
+                        <p class="font-body-sm text-xs text-outline">veces inversión FF</p>
+                    </div>
+                </div>
+
+                <!-- Scenarios -->
+                <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm">
+                    <h2 class="font-h3 text-h3 text-primary mb-sm">Escenario Seleccionado <span id="dosePill" class="bg-primary-fixed text-on-primary-fixed px-2 py-1 rounded-full text-sm ml-2">—</span></h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+                        <div class="bg-surface p-sm rounded-DEFAULT border border-surface-variant">
+                            <h3 class="font-h3 text-sm text-on-surface mb-2">Impacto por animal/día</h3>
+                            <p class="font-body-sm text-on-surface-variant" id="dailyResult">—</p>
+                        </div>
+                        <div class="bg-surface p-sm rounded-DEFAULT border border-surface-variant">
+                            <h3 class="font-h3 text-sm text-on-surface mb-2">Impacto económico del periodo</h3>
+                            <p class="font-body-sm text-on-surface-variant" id="periodResult">—</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-sm p-sm bg-surface-container-low border border-surface-variant rounded-DEFAULT font-body-sm text-on-surface-variant" id="energyDetail">
+                        —
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-md mt-sm">
+                    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm">
+                        <h2 class="font-h3 text-sm text-primary mb-sm">Dosis vs Utilidad Bruta Diaria</h2>
+                        <canvas id="profitChart"></canvas>
+                    </div>
+                    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm">
+                        <h2 class="font-h3 text-sm text-primary mb-sm" id="prodChartTitle">Dosis vs Producción Adicional</h2>
+                        <canvas id="prodChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="bg-surface-container-lowest border border-outline-variant rounded-lg shadow-sm overflow-hidden mt-sm">
+                    <div class="p-md border-b border-outline-variant bg-surface-container-low">
+                        <h2 class="font-h3 text-sm text-primary">Tabla Comparativa por Dosis</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table id="resultTable" class="w-full">
+                            <thead>
+                                <tr>
+                                    <th>Dosis g/d</th>
+                                    <th>Mejora DMS</th>
+                                    <th>Deg. Dieta</th>
+                                    <th>EM</th>
+                                    <th>EN</th>
+                                    <th>ΔEN útil</th>
+                                    <th id="thProd">Prod/d</th>
+                                    <th>Costo FF/d</th>
+                                    <th>Ingreso/d</th>
+                                    <th>Utilidad/d</th>
+                                    <th>ROI</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    const suppliedCurve=[{dose:0,imp:0},{dose:1.5,imp:2.0},{dose:2.5,imp:1.93},{dose:5.0,imp:5.0},{dose:5.95,imp:5.0}];
+    const biosCurve=[{dose:0,imp:0},{dose:1.5,imp:1.84},{dose:3.0,imp:3.0},{dose:5.0,imp:4.21},{dose:6.0,imp:5.0},{dose:10.0,imp:5.5}];
+
+    let profitChart;
+    let prodChart;
+
+    function money(value){if(!isFinite(value))return"—";return value.toLocaleString("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0})}
+    function num(value,decimals=2){if(!isFinite(value))return"—";return value.toLocaleString("es-CO",{minimumFractionDigits:decimals,maximumFractionDigits:decimals})}
+    function getInput(id){const value=parseFloat(document.getElementById(id).value);return isFinite(value)?value:0}
+
+    function interpolate(points,x){
+        if(x<=points[0].dose)return points[0].imp;
+        const last=points[points.length-1];
+        if(x>=last.dose)return last.imp;
+        for(let i=0;i<points.length-1;i++){
+            const a=points[i],b=points[i+1];
+            if(x>=a.dose&&x<=b.dose){
+                const t=(x-a.dose)/(b.dose-a.dose);
+                return a.imp+t*(b.imp-a.imp);
+            }
+        }
+        return 0;
+    }
+
+    function getImprovement(dose,params){
+        if(params.responseMode==="manual")return params.manualImprovement;
+        if(params.responseMode==="provided")return interpolate(suppliedCurve,dose);
+        return interpolate(biosCurve,Math.min(dose,10));
+    }
+
+    function getParams(){
+        return{
+            system:document.getElementById("system").value,
+            dose:getInput("dose"),
+            animalDays:getInput("animalDays"),
+            dmi:getInput("dmi"),
+            foragePct:getInput("foragePct"),
+            forageDeg:getInput("forageDeg"),
+            concDeg:getInput("concDeg"),
+            forageEB:getInput("forageEB"),
+            concEB:getInput("concEB"),
+            fortcellPrice:getInput("fortcellPrice"),
+            milkPrice:getInput("milkPrice"),
+            meatPrice:getInput("meatPrice"),
+            feedMsPrice:getInput("feedMsPrice"),
+            meDe:getInput("meDe"),
+            neMe:getInput("neMe"),
+            milkMcal:getInput("milkMcal"),
+            gainMcal:getInput("gainMcal"),
+            capture:getInput("capture"),
+            responseMode:document.getElementById("responseMode").value,
+            manualImprovement:getInput("manualImprovement")
+        }
+    }
+
+    function calcForDose(dose,params){
+        const forageFrac=params.foragePct/100,concFrac=1-forageFrac;
+        const baseDietDeg=(forageFrac*params.forageDeg+concFrac*params.concDeg)/100;
+        const impPctPoints=getImprovement(dose,params);
+        const newForageDeg=Math.min(95,params.forageDeg+impPctPoints)/100;
+        const newConcDeg=Math.min(95,params.concDeg+impPctPoints)/100;
+        const newDietDeg=forageFrac*newForageDeg+concFrac*newConcDeg;
+        const dietEB=forageFrac*params.forageEB+concFrac*params.concEB;
+        
+        const baseEDkg=dietEB*baseDietDeg, baseEMkg=baseEDkg*params.meDe, baseNEkg=baseEMkg*params.neMe;
+        const newEDkg=dietEB*newDietDeg, newEMkg=newEDkg*params.meDe, newNEkg=newEMkg*params.neMe;
+        
+        const deltaNEkg=Math.max(0,newNEkg-baseNEkg);
+        const deltaNEday=deltaNEkg*params.dmi;
+        const usefulNEday=deltaNEday*params.capture;
+        
+        const milkLday=params.milkMcal>0?usefulNEday/params.milkMcal:0;
+        const gainKgday=params.gainMcal>0?usefulNEday/params.gainMcal:0;
+        
+        const costFFday=dose*params.fortcellPrice;
+        const incomeMilkday=milkLday*params.milkPrice;
+        const incomeMeatday=gainKgday*params.meatPrice;
+        const selectedIncomeDay=params.system==="milk"?incomeMilkday:incomeMeatday;
+        
+        const grossProfitDay=selectedIncomeDay-costFFday;
+        const roi=costFFday>0?grossProfitDay/costFFday:null;
+        
+        return{
+            dose,impPctPoints,baseDietDeg,newDietDeg,dietEB,baseEDkg,baseEMkg,baseNEkg,
+            newEDkg,newEMkg,newNEkg,deltaNEkg,deltaNEday,usefulNEday,milkLday,gainKgday,
+            costFFday,incomeMilkday,incomeMeatday,selectedIncomeDay,grossProfitDay,roi,
+            periodCost:costFFday*params.animalDays,
+            periodIncome:selectedIncomeDay*params.animalDays,
+            periodProfit:grossProfitDay*params.animalDays
+        };
+    }
+
+    function calculate(){
+        const params=getParams();
+        const r=calcForDose(params.dose,params);
+        const isMilk=params.system==="milk";
+        const scenarioName=isMilk?"Lechería especializada":"Carne / ceba";
+        
+        document.getElementById("dosePill").textContent=scenarioName+" · "+num(params.dose,1)+" g/día";
+        document.getElementById("improvementOut").textContent=num(r.impPctPoints,2)+"%";
+        document.getElementById("deltaNeOut").textContent=num(r.usefulNEday,2);
+        
+        document.getElementById("mainProdLabel").textContent=isMilk?"LECHE ADICIONAL":"CARNE ADICIONAL";
+        document.getElementById("mainProdOut").textContent=isMilk?num(r.milkLday,2):num(r.gainKgday,3);
+        document.getElementById("mainProdSmall").textContent=isMilk?"L/animal/día":"kg PV/animal/día";
+        document.getElementById("thProd").textContent=isMilk?"Leche L/d":"Carne kg/d";
+        document.getElementById("prodChartTitle").textContent=isMilk?"Dosis vs Leche Adicional":"Dosis vs Ganancia Adicional";
+        
+        document.getElementById("roiOut").textContent=r.roi===null?"—":num(r.roi,1)+"x";
+        
+        document.getElementById("dailyResult").innerHTML=
+            `Con <strong>${num(params.dmi,1)} kg MS/día</strong> y una dieta <strong>${num(params.foragePct,0)}% forraje / ${num(100-params.foragePct,0)}% concentrado</strong>, la dosis de <strong>${num(params.dose,1)} g/día</strong> genera <strong>${num(r.usefulNEday,2)} Mcal EN aprovechable/día</strong>.<br><br>` +
+            (isMilk?`Equivale a <strong>${num(r.milkLday,2)} L de leche/día</strong> adicionales.`:`Equivale a <strong>${num(r.gainKgday,3)} kg de peso vivo/día</strong> adicionales.`);
+            
+        document.getElementById("periodResult").innerHTML=
+            `Costo FF: <strong>${money(r.costFFday)}/día</strong> &bull; Ingreso adicional: <strong>${money(r.selectedIncomeDay)}/día</strong> &bull; Utilidad bruta: <strong>${money(r.grossProfitDay)}/día</strong>.<br><br>En <strong>${num(params.animalDays,0)} días</strong>: ingreso <strong>${money(r.periodIncome)}</strong>, costo <strong>${money(r.periodCost)}</strong>, utilidad <strong>${money(r.periodProfit)}</strong>.`;
+            
+        document.getElementById("energyDetail").innerHTML=
+            `EB ponderada de la dieta: <strong>${num(r.dietEB,2)} Mcal/kg MS</strong> &bull; ` +
+            `Degradabilidad base: <strong>${num(r.baseDietDeg*100,2)}%</strong> | Con FF: <strong>${num(r.newDietDeg*100,2)}%</strong><br>` +
+            `Control: ED <strong>${num(r.baseEDkg,3)}</strong>, EM <strong>${num(r.baseEMkg,3)}</strong>, EN <strong>${num(r.baseNEkg,3)}</strong> Mcal/kg MS<br>` +
+            `Con FF: ED <strong>${num(r.newEDkg,3)}</strong>, EM <strong>${num(r.newEMkg,3)}</strong>, EN <strong>${num(r.newNEkg,3)}</strong> Mcal/kg MS`;
+
+        const doses=[0,0.3,1,1.5,2.5,3,5,5.95,7.5,10];
+        if(!doses.includes(params.dose))doses.push(params.dose);
+        doses.sort((a,b)=>a-b);
+        const rows=doses.map(d=>calcForDose(d,params));
+        
+        renderTable(rows,params.dose,isMilk);
+        renderCharts(rows,isMilk);
+    }
+
+    function renderTable(rows,selectedDose,isMilk){
+        const tbody=document.querySelector("#resultTable tbody");
+        tbody.innerHTML="";
+        rows.forEach(r=>{
+            const tr=document.createElement("tr");
+            if(Math.abs(r.dose-selectedDose)<0.0001) tr.classList.add("highlight");
+            const prodVal=isMilk?num(r.milkLday,2):num(r.gainKgday,3);
+            tr.innerHTML=`
+                <td>${num(r.dose,1)}</td>
+                <td>${num(r.impPctPoints,2)}%</td>
+                <td>${num(r.newDietDeg*100,2)}%</td>
+                <td>${num(r.newEMkg,3)}</td>
+                <td>${num(r.newNEkg,3)}</td>
+                <td>${num(r.usefulNEday,2)}</td>
+                <td>${prodVal}</td>
+                <td>${money(r.costFFday)}</td>
+                <td>${money(r.selectedIncomeDay)}</td>
+                <td>${money(r.grossProfitDay)}</td>
+                <td>${r.roi===null?"—":num(r.roi,1)+"x"}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function renderCharts(rows,isMilk){
+        const labels=rows.map(r=>r.dose.toString());
+        const profits=rows.map(r=>Math.round(r.grossProfitDay));
+        const prodData=rows.map(r=>Number((isMilk?r.milkLday:r.gainKgday).toFixed(3)));
+
+        const primaryColor='#00205f';
+        const secondaryColor='#376b00';
+
+        if(profitChart) profitChart.destroy();
+        if(prodChart) prodChart.destroy();
+
+        profitChart=new Chart(document.getElementById("profitChart"),{
+            type:"line",
+            data:{
+                labels,
+                datasets:[{
+                    label:"Utilidad bruta (COP)",
+                    data:profits,
+                    borderColor:primaryColor,
+                    backgroundColor:'rgba(0, 32, 95, 0.1)',
+                    fill:true,
+                    tension:0.3,
+                    pointRadius:4,
+                    pointBackgroundColor:primaryColor
+                }]
+            },
+            options:{
+                responsive:true,
+                plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>money(ctx.raw)}}},
+                scales:{x:{title:{display:true,text:"Dosis (g/d)"}}}
+            }
+        });
+
+        prodChart=new Chart(document.getElementById("prodChart"),{
+            type:"line",
+            data:{
+                labels,
+                datasets:[{
+                    label:isMilk?"Leche Adicional (L/d)":"Carne Adicional (kg/d)",
+                    data:prodData,
+                    borderColor:secondaryColor,
+                    backgroundColor:'rgba(55, 107, 0, 0.1)',
+                    fill:true,
+                    tension:0.3,
+                    pointRadius:4,
+                    pointBackgroundColor:secondaryColor
+                }]
+            },
+            options:{
+                responsive:true,
+                plugins:{legend:{display:false}},
+                scales:{x:{title:{display:true,text:"Dosis (g/d)"}}}
+            }
+        });
+    }
+
+    function applySystemDefaults(){
+        const system=document.getElementById("system").value;
+        if(system==="milk"){
+            document.getElementById("dmi").value=18;
+            document.getElementById("foragePct").value=60;
+            document.getElementById("forageDeg").value=60;
+            document.getElementById("concDeg").value=62;
+            document.getElementById("forageEB").value=4.4;
+            document.getElementById("concEB").value=4.4;
+            document.getElementById("milkPrice").value=2200;
+            document.getElementById("meatPrice").value=8500;
+            document.getElementById("feedMsPrice").value=900;
+            document.getElementById("milkMcal").value=0.74;
+            document.getElementById("gainMcal").value=5.5;
+            document.getElementById("capture").value=0.65;
+            
+            document.getElementById("milkPriceContainer").style.display='flex';
+            document.getElementById("meatPriceContainer").style.display='none';
+            document.getElementById("milkMcalContainer").style.display='flex';
+            document.getElementById("gainMcalContainer").style.display='none';
+        }else{
+            document.getElementById("dmi").value=9;
+            document.getElementById("foragePct").value=95;
+            document.getElementById("forageDeg").value=55;
+            document.getElementById("concDeg").value=65;
+            document.getElementById("forageEB").value=4.3;
+            document.getElementById("concEB").value=4.4;
+            document.getElementById("milkPrice").value=2200;
+            document.getElementById("meatPrice").value=8500;
+            document.getElementById("feedMsPrice").value=600;
+            document.getElementById("milkMcal").value=0.74;
+            document.getElementById("gainMcal").value=5.8;
+            document.getElementById("capture").value=0.55;
+
+            document.getElementById("milkPriceContainer").style.display='none';
+            document.getElementById("meatPriceContainer").style.display='flex';
+            document.getElementById("milkMcalContainer").style.display='none';
+            document.getElementById("gainMcalContainer").style.display='flex';
+        }
+        calculate();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const inputs = document.querySelectorAll("input, select");
+        inputs.forEach(input => {
+            input.addEventListener("input", calculate);
+            input.addEventListener("change", calculate);
+        });
+        
+        const doseInput = document.getElementById('dose');
+        const doseSlider = document.getElementById('doseSlider');
+        
+        if(doseSlider && doseInput) {
+            doseSlider.addEventListener('input', (e) => {
+                doseInput.value = e.target.value;
+                calculate();
+            });
+            doseInput.addEventListener('input', (e) => {
+                doseSlider.value = e.target.value;
+            });
+        }
+
+        document.getElementById("system").addEventListener("change", applySystemDefaults);
+        document.getElementById("responseMode").addEventListener("change", (e) => {
+            document.getElementById("manualImprovementContainer").style.display = e.target.value === "manual" ? 'flex' : 'none';
+        });
+
+        // Initialize state
+        applySystemDefaults();
+    });
+
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+        sidebar.classList.toggle('-translate-x-full');
+        if (sidebar.classList.contains('-translate-x-full')) {
+            mainContent.classList.remove('md:ml-64');
+            mainContent.classList.add('md:ml-0');
+        } else {
+            mainContent.classList.remove('md:ml-0');
+            mainContent.classList.add('md:ml-64');
+        }
+    }
+</script>
+</body>
+</html>
