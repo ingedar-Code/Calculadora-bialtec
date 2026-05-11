@@ -395,9 +395,9 @@
                         <p class="font-body-sm text-xs text-outline">Mcal/animal/día</p>
                     </div>
                     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm shadow-sm border-l-2 border-l-primary">
-                        <p class="font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase" id="mainProdLabel">PRODUCCIÓN ADIC.</p>
+                        <p class="font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase" id="mainProdLabel">CARNE ADICIONAL</p>
                         <p class="font-h2 text-h2 text-primary" id="mainProdOut">—</p>
-                        <p class="font-body-sm text-xs text-outline" id="mainProdSmall">—</p>
+                        <p class="font-body-sm text-xs text-outline" id="mainProdSmall">kg PV/animal/día</p>
                     </div>
                     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm shadow-sm border-l-2 border-l-secondary">
                         <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">ROI</p>
@@ -433,7 +433,7 @@
                         <canvas id="profitChart"></canvas>
                     </div>
                     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm">
-                        <h2 class="font-h3 text-sm text-primary mb-sm" id="prodChartTitle">Dosis vs Producción Adicional</h2>
+                        <h2 class="font-h3 text-sm text-primary mb-sm" id="prodChartTitle">Dosis vs Ganancia Adicional</h2>
                         <canvas id="prodChart"></canvas>
                     </div>
                 </div>
@@ -566,11 +566,7 @@
         document.getElementById("improvementOut").textContent=num(r.impPctPoints,2)+"%";
         document.getElementById("deltaNeOut").textContent=num(r.usefulNEday,2);
         
-        document.getElementById("mainProdLabel").textContent="CARNE ADICIONAL";
         document.getElementById("mainProdOut").textContent=num(r.gainKgday,3);
-        document.getElementById("mainProdSmall").textContent="kg PV/animal/día";
-        document.getElementById("thProd").textContent="Carne kg/d";
-        document.getElementById("prodChartTitle").textContent="Dosis vs Ganancia Adicional";
         
         document.getElementById("roiOut").textContent=r.roi===null?"—":num(r.roi,1)+"x";
         
